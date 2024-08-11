@@ -46,18 +46,13 @@ if __name__=="__main__":
     requests.packages.urllib3.disable_warnings()
     f=open("sites.txt","a")
     pageQueue=Queue(2000000)
-    numalpha=[chr(i) for i in range(97,123)]+[str(i) for i in range(0,10)]
-    s=''.join(numalpha)
-    for x1,i1 in enumerate(s):
-        if x1>=idx('o'):
-            continue
-        for x2,i2 in enumerate(s):
-            for x3,i3 in enumerate(s):
-                if (x1,x2,x3)<(idx('n'),idx('9'),idx('q')):
-                    continue
-                for x4,i4 in enumerate(s):
+    alpha=[chr(i) for i in range(97,123)]
+    s=''.join(alpha)
+    for num in range(0,1000):
+        for x1,i1 in enumerate(s):
+            for x2,i2 in enumerate(s):
                     # vis("https://"+i1+i2+i3+i4+".com")
-                    pageQueue.put("https://"+i1+i2+i3+i4+".com")
+                    pageQueue.put("https://"+str(num).zfill(3)+i1+i2+".com")
     crawl_threads=[]
     for thread_id in range(1,101):
         print("初始化线程%d"%(thread_id))
